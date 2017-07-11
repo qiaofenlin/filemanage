@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status=debug 可以查看log4j的装配过程 -->
+<configuration status="off" monitorInterval="1800">
+	<properties>
+		<property name="LOG_HOME">/mnt/aicyber_log/file_manage/</property>
+		<!-- 日志备份目录 -->
+		<property name="BACKUP_HOME">{LOG_HOME}/backup</property>
+		<property name="SERVER_NAME">file_manage</property>
+	</properties>
+	<appenders>
+		<!-- 定义控制台输出 -->
+		<Console name="Console" target="SYSTEM_OUT"  follow="true">
+			<PatternLayout
+				pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
+		</Console>
+		<!-- 文件日志 -->
+		<RollingRandomAccessFile name="FileLog"
+			fileName="${LOG_HOME}/${SERVER_NAME}.log"
+			filePattern="${LOG_HOME}/$${date:yyyy-MM}/${SERVER_NAME}-%d{yyyy-MM-dd}-%i.log.gz">
+			<PatternLayout
+				pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="2000" />
+		</RollingRandomAccessFile>
+	</appenders>
+	<loggers>
+		<!-- 3rdparty Loggers -->
+		<logger name="org.springframework.core" level="info">
+		</logger>
+		<logger name="org.springframework.beans" level="info">
+		</logger>
+		<logger name="org.springframework.context" level="info">
+		</logger>
+		<logger name="org.springframework.web" level="info">
+		</logger>
+		<logger name="org.jboss.netty" level="warn">
+		</logger>
+		<logger name="org.apache.http" level="warn">
+		</logger>
+		<logger name="com.mchange.v2" level="warn">
+		</logger>
+		<!-- Root Logger -->
+		<root level="info">
+			<appender-ref ref="FileLog" />
+			<appender-ref ref="Console" />
+		</root>
+	</loggers>
+</configuration>  

@@ -1,0 +1,240 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>com.aicyber</groupId>
+		<artifactId>c4</artifactId>
+		<version>1.0-beta4</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>filemanage.v1</artifactId>
+	<packaging>war</packaging>
+	<version>1.0</version>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<aicyber.base.version>1.0-beta4</aicyber.base.version>
+		<aicyber.tools.version>1.0-beta6</aicyber.tools.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+            <groupId>com.github.briandilley.jsonrpc4j</groupId>
+            <artifactId>jsonrpc4j</artifactId>
+            <version>1.0</version>
+        </dependency>
+	
+	
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>3.8</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>3.8</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml-schemas</artifactId>
+		    <version>3.9</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-scratchpad</artifactId>
+		    <version>3.8-beta4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.xmlbeans/xmlbeans -->
+		<dependency>
+		    <groupId>org.apache.xmlbeans</groupId>
+		    <artifactId>xmlbeans</artifactId>
+		    <version>2.3.0</version>
+		</dependency>
+		
+		
+		
+		
+		
+		
+		<dependency>
+			<groupId>com.aicyber</groupId>
+			<artifactId>base</artifactId>
+			<version>${aicyber.base.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.aicyber</groupId>
+			<artifactId>tools</artifactId>
+			<version>${aicyber.tools.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<!-- 通过mvn -P传入的参数来决定使用那个profile 例如，mvn clean package -P production，则会找到id为production对应的profile，那么deploy.env属性就为 
+			profile>properties>deploy.env定义的值，即：production deploy.env这个值用于在package的时候， -->
+		<profile>
+			<id>test</id>
+			<properties>
+				<deploy.env>test</deploy.env>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>wanhao</id>
+			<properties>
+				<deploy.env>wanhao</deploy.env>
+			</properties>
+		</profile>
+		<profile>
+			<id>shell</id>
+			<properties>
+				<deploy.env>shell</deploy.env>
+			</properties>
+		</profile>
+		<profile>
+			<id>lastmile</id>
+			<properties>
+				<deploy.env>lastmile</deploy.env>
+			</properties>
+		</profile>
+		<profile>
+			<id>maserati</id>
+			<properties>
+				<deploy.env>maserati</deploy.env>
+			</properties>
+		</profile>
+		<profile>
+			<id>ukeducation</id>
+			<properties>
+				<deploy.env>ukeducation</deploy.env>
+			</properties>
+		</profile>
+		<profile>
+			<id>xintiandi</id>
+			<properties>
+				<deploy.env>xintiandi</deploy.env>
+			</properties>
+		</profile>
+		<profile>
+			<id>ikeacn</id>
+			<properties>
+				<deploy.env>ikeacn</deploy.env>
+			</properties>
+		</profile>
+		<profile>
+			<id>ikea</id>
+			<properties>
+				<deploy.env>ikea</deploy.env>
+			</properties>
+		</profile>
+		<profile>
+			<id>papajohns</id>
+			<properties>
+				<deploy.env>papajohns</deploy.env>
+			</properties>
+		</profile>
+	</profiles>
+
+	<build>
+		<plugins>
+			<!-- Compiler 插件, 设定JDK版本 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<showWarnings>true</showWarnings>
+					<compilerArguments>
+						<bootclasspath>${java.home}\lib\rt.jar;${java.home}\lib\jce.jar</bootclasspath>
+					</compilerArguments>
+				</configuration>
+			</plugin>
+
+			<!-- war 打包插件, 设定war包名称不带版本号 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<packagingExcludes>WEB-INF/classes/properties/**</packagingExcludes>
+					<webResources>
+						<resource>
+							<!-- 相对于pom.xml文件的路径 -->
+							<directory>src/main/resources/properties/${deploy.env}/</directory>
+							<filtering>false</filtering>
+							<targetPath>WEB-INF/classes</targetPath>
+						</resource>
+					</webResources>
+					<warName>znapi</warName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>
