@@ -34,12 +34,12 @@ public class JsonrpcClinetController extends BaseController {
 		String json = IOUtil.getStreamString(inputStream, encode);
 		logger.info("----------json:" + json);
 		SurveyBean survey = (SurveyBean) JsonUtil.parseObject(json,SurveyBean.class);
-		logger.info("----------survey surveyId:" + survey.getSurveyId());
 		JsonRpcHttpClient client = new JsonRpcHttpClient(new URL(JSON_RPC_URL_Aicyber));
 		SurveyImpl service = (SurveyImpl) ProxyUtil.createClientProxy(
 				new JsonrpcClinetController().getClass().getClassLoader(),
 				SurveyImpl.class, client);
 		try {
+			logger.info("----------survey surveyId:" + survey.getSurveyId());
 			if (survey.getSurveyId() == null) {
 				return new AjaxObj(false, "surveyId is null", null);
 			}
@@ -92,31 +92,13 @@ public class JsonrpcClinetController extends BaseController {
 			this.logger.info("error message is " + e.getMessage());
 			return new AjaxObj(false, e.getMessage(), null);
 		}
-		String str = service.Aicyber_listRecord(survey.getRoundId());
+		logger.info("userId is ..."+survey.getUserId());
+		logger.info("appId is ..."+survey.getAppid());
+		logger.info("surveyId is ..."+survey.getSurveyId());
+		String str = service.Aicyber_listRecord(survey.getUserId(),survey.getAppid(),survey.getSurveyId());
 		return new AjaxObj(str);
 	}
 
-	@RequestMapping("getrecordinfo.json")
-	@ResponseBody
-	public AjaxObj Aicyber_listrecord_ad(HttpServletRequest request) throws Exception{
-		ServletInputStream inputStream = request.getInputStream();
-		String json = IOUtil.getStreamString(inputStream, encode);
-		SurveyBean survey = JsonUtil.parseObject( json, SurveyBean.class);
-		JsonRpcHttpClient client = new JsonRpcHttpClient(new URL(JSON_RPC_URL_Aicyber));
-		SurveyImpl service = (SurveyImpl) ProxyUtil.createClientProxy(
-				new JsonrpcClinetController().getClass().getClassLoader(),
-				SurveyImpl.class, client);
-		try {
-			if (survey == null) {
-				return new AjaxObj(false, "survey is null", null);
-			}
-		} catch (Exception e) {
-			this.logger.info("error message is " + e.getMessage());
-			return new AjaxObj(false, e.getMessage(), null);
-		}
-		String str = service.Aicyber_listrecord_ad(survey.getUserId(), survey.getAppid(), survey.getSurveyId());
-		return new AjaxObj(str);
-	}
 //==========================================================================================
 	@RequestMapping({ "/gc/startsurvey.json" })
 	@ResponseBody

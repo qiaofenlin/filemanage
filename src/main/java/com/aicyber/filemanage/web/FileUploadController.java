@@ -1,4 +1,4 @@
-package com.aicyber.filemanage.web;
+/*package com.aicyber.filemanage.web;
 
 import java.io.File;
 import java.net.FileNameMap;
@@ -112,3 +112,4 @@ public class FileUploadController {
 	}
 
 }
+*/
