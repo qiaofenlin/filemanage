@@ -85,6 +85,7 @@ public class JsonrpcClinetController extends BaseController {
 				new JsonrpcClinetController().getClass().getClassLoader(),
 				SurveyImpl.class, client);
 		try {
+			
 			if (survey == null) {
 				return new AjaxObj(false, "roundId is null", null);
 			}
